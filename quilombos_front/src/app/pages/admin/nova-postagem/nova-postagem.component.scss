@@ -1,0 +1,153 @@
+.nova-postagem-page { min-height: 100vh; background: #f8f6f3; }
+
+.np-header {
+  background: #2c1810; padding: 1.2rem 0;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
+.np-title { color: #fff; font-size: 1.4rem; font-weight: 700; margin: 0; }
+.back-link { color: #d4a24e; font-size: 0.85rem; text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+
+.btn-salvar {
+  background: #c9882a; color: #fff; border: none;
+  padding: 0.65rem 1.8rem; border-radius: 8px; font-weight: 700;
+  font-size: 1rem; cursor: pointer; transition: background 0.2s;
+  &:hover:not(:disabled) { background: #b07620; }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}
+
+.np-body {
+  max-width: 860px;
+  padding: 2rem 0 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-card {
+  background: #fff; border-radius: 12px; padding: 1.8rem;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+
+.card-section-title { font-size: 1.1rem; font-weight: 700; color: #2c1810; margin-bottom: 0.8rem; }
+.card-hint { font-size: 0.88rem; color: #9e8c82; margin-bottom: 1rem; }
+.opcional { color: #baa898; font-weight: 400; font-size: 0.85rem; }
+
+.campo {
+  margin-bottom: 1.2rem;
+  label { display: block; font-weight: 600; color: #4a3728; font-size: 0.9rem; margin-bottom: 0.3rem; }
+  input, textarea {
+    width: 100%; padding: 0.7rem 1rem;
+    border: 2px solid #e0d3c8; border-radius: 8px;
+    font-size: 0.98rem; color: #2c1810;
+    font-family: inherit; outline: none;
+    transition: border-color 0.2s;
+    &:focus { border-color: #c9882a; }
+    &::placeholder { color: #c0afa5; }
+  }
+}
+
+textarea {
+  width: 100%; padding: 0.9rem 1rem;
+  border: 2px solid #e0d3c8; border-radius: 8px;
+  font-size: 0.98rem; color: #2c1810;
+  font-family: inherit; outline: none; resize: vertical;
+  line-height: 1.7;
+  transition: border-color 0.2s;
+  &:focus { border-color: #c9882a; }
+  &::placeholder { color: #c0afa5; }
+}
+
+/* Quilombo selector */
+.quilombo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.quilombo-option {
+  border: 2px solid #e0d3c8; border-radius: 10px;
+  padding: 1rem; cursor: pointer; transition: all 0.2s;
+  display: flex; flex-direction: column; gap: 0.2rem;
+  position: relative;
+
+  input { display: none; }
+
+  .q-nome { font-weight: 700; color: #2c1810; }
+  .q-local { font-size: 0.82rem; color: #9e8c82; }
+
+  &.selecionado {
+    border-color: #c9882a;
+    background: #fef8ef;
+    &::after {
+      content: '✓';
+      position: absolute; top: 8px; right: 12px;
+      color: #c9882a; font-weight: 700;
+    }
+  }
+
+  &:hover:not(.selecionado) { border-color: #d4a24e; background: #fdfbf7; }
+}
+
+/* Upload areas */
+.upload-area {
+  border: 2px dashed #d4c4b8; border-radius: 10px;
+  padding: 2.5rem; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  color: #9e8c82; text-align: center;
+  transition: border-color 0.2s, background 0.2s;
+
+  .upload-icon { font-size: 2.5rem; }
+  .upload-hint { font-size: 0.8rem; color: #baa898; }
+
+  &:hover { border-color: #c9882a; background: #fdf9f4; }
+}
+
+.header-preview {
+  position: relative; border-radius: 10px; overflow: hidden;
+  max-height: 300px;
+
+  img { width: 100%; max-height: 300px; object-fit: cover; display: block; }
+
+  .btn-remover-img {
+    position: absolute; top: 10px; right: 10px;
+    background: rgba(0,0,0,0.6); color: #fff; border: none;
+    border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 0.85rem;
+    &:hover { background: #c0392b; }
+  }
+}
+
+/* Galeria upload grid */
+.galeria-upload {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.preview-item {
+  aspect-ratio: 1; border-radius: 8px; overflow: hidden;
+  position: relative;
+
+  img { width: 100%; height: 100%; object-fit: cover; }
+
+  .remove-btn {
+    position: absolute; top: 4px; right: 4px;
+    background: rgba(0,0,0,0.55); color: #fff; border: none;
+    width: 24px; height: 24px; border-radius: 50%;
+    cursor: pointer; font-size: 0.75rem; display: flex;
+    align-items: center; justify-content: center;
+    &:hover { background: #c0392b; }
+  }
+}
+
+.galeria-add {
+  aspect-ratio: 1; border: 2px dashed #d4c4b8; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #c9882a; font-weight: 600; font-size: 0.9rem;
+  transition: all 0.2s;
+  text-align: center; padding: 1rem;
+  &:hover { border-color: #c9882a; background: #fdf9f4; }
+}

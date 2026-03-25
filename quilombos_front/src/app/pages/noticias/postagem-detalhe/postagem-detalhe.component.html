@@ -1,0 +1,126 @@
+<div class="detalhe-page" *ngIf="!carregando && !erro && postagem">
+
+  <!-- Hero header com imagem -->
+  <div class="post-hero" [style.backgroundImage]="postagem.imagemHeaderUrl ? 'url(' + postagem.imagemHeaderUrl + ')' : 'none'">
+    <div class="post-hero-overlay"></div>
+    <div class="container post-hero-content">
+      <a routerLink="/noticias" class="back-link">← Voltar às Notícias</a>
+      <span class="quilombo-badge">{{ postagem.quilomboNome }}</span>
+      <h1 class="post-titulo">{{ postagem.titulo }}</h1>
+      <p class="post-subtitulo" *ngIf="postagem.subtitulo">{{ postagem.subtitulo }}</p>
+      <div class="post-meta">{{ formatarData(postagem.dataHora) }}</div>
+    </div>
+  </div>
+
+  <!-- Corpo do post -->
+  <div class="container post-body">
+
+    <!-- Texto com suporte a YouTube -->
+    <div class="post-texto">
+      <ng-container *ngFor="let bloco of blocoTexto">
+        <p *ngIf="bloco.tipo === 'texto'">{{ bloco.conteudo }}</p>
+        <div class="youtube-embed" *ngIf="bloco.tipo === 'youtube'">
+          <iframe
+            [src]="youtubeUrl(bloco.conteudo)"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Galeria de imagens -->
+    <div class="galeria" *ngIf="postagem.imagens.length > 0">
+      <h3 class="galeria-titulo">Galeria de Imagens</h3>
+      <div class="galeria-grid">
+        <div
+          class="galeria-item"
+          *ngFor="let img of postagem.imagens; let i = index"
+          (click)="abrirImagem(img.url, i)"
+        >
+          <img [src]="img.url" [alt]="img.nomeOriginal || 'Imagem ' + (i+1)" />
+          <div class="galeria-overlay"><span>🔍</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" *ngIf="imagemAberta" (click)="fecharImagem()">
+      <button class="lightbox-nav prev" (click)="$event.stopPropagation(); imagemAnterior()" *ngIf="postagem.imagens.length > 1">‹</button>
+      <img [src]="imagemAberta" alt="Imagem em destaque" (click)="$event.stopPropagation()" />
+      <button class="lightbox-nav next" (click)="$event.stopPropagation(); proximaImagem()" *ngIf="postagem.imagens.length > 1">›</button>
+      <button class="lightbox-close" (click)="fecharImagem()">✕</button>
+    </div>
+
+    <!-- Seção de comentários -->
+    <div class="comentarios-section">
+      <h3 class="sec-title">Comentários ({{ postagem.comentarios.length }})</h3>
+
+      <!-- Lista de comentários -->
+      <div class="comentarios-lista" *ngIf="postagem.comentarios.length > 0">
+        <div class="comentario-item" *ngFor="let c of postagem.comentarios">
+          <div class="comentario-avatar">{{ c.nome.charAt(0).toUpperCase() }}</div>
+          <div class="comentario-body">
+            <div class="comentario-header">
+              <strong>{{ c.nome }}</strong>
+              <span class="comentario-data">{{ formatarData(c.dataHora) }}</span>
+            </div>
+            <p class="comentario-texto">{{ c.texto }}</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="sem-comentarios" *ngIf="postagem.comentarios.length === 0">
+        Seja o primeiro a comentar!
+      </p>
+
+      <!-- Formulário de novo comentário -->
+      <div class="comentario-form">
+        <h4>Deixar um comentário</h4>
+
+        <div class="sucesso-msg" *ngIf="comentarioEnviado">
+          ✅ Comentário enviado com sucesso!
+        </div>
+
+        <div class="campo">
+          <label>Nome *</label>
+          <input type="text" [(ngModel)]="nomeComentario" placeholder="Seu nome" maxlength="100" />
+        </div>
+        <div class="campo">
+          <label>Comentário *</label>
+          <textarea [(ngModel)]="textoComentario" rows="4" placeholder="Escreva seu comentário..." maxlength="2000"></textarea>
+        </div>
+
+        <!-- hCaptcha widget -->
+        <div
+          class="h-captcha"
+          [attr.data-sitekey]="hcaptchaSiteKey"
+          data-callback="onCaptchaSuccess"
+          data-expired-callback="onCaptchaExpire"
+        ></div>
+
+        <div class="erro-msg" *ngIf="erroComentario">{{ erroComentario }}</div>
+
+        <button
+          class="btn-enviar"
+          (click)="enviarComentario()"
+          [disabled]="enviandoComentario"
+        >
+          {{ enviandoComentario ? 'Enviando...' : 'Enviar Comentário' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loading -->
+<div class="loading-pg" *ngIf="carregando">
+  <div class="spinner"></div>
+</div>
+
+<!-- Erro -->
+<div class="erro-pg container" *ngIf="!carregando && erro">
+  <h2>Postagem não encontrada</h2>
+  <a routerLink="/noticias">← Voltar às Notícias</a>
+</div>

@@ -1,0 +1,96 @@
+<div class="nova-postagem-page">
+  <div class="np-header mt-5">
+    <div class="container d-flex align-items-center justify-content-between gap-2 flex-wrap">
+      <div>
+        <h1 class="np-title">Nova Postagem</h1>
+        <a routerLink="/admin/dashboard" class="back-link">← Voltar ao painel</a>
+      </div>
+      <button class="btn-salvar" (click)="salvar()" [disabled]="salvando">
+        {{ salvando ? 'Salvando...' : '💾 Salvar Postagem' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="container np-body">
+
+    <!-- Quilombo -->
+    <div class="form-card">
+      <h3 class="card-section-title">📍 Quilombo relacionado *</h3>
+      <div class="quilombo-grid">
+        <label
+          *ngFor="let q of quilombos"
+          class="quilombo-option"
+          [class.selecionado]="quilomboId === q.id"
+        >
+          <input type="radio" name="quilombo" [value]="q.id" [(ngModel)]="quilomboId" />
+          <span class="q-nome">{{ q.nome }}</span>
+          <span class="q-local">{{ q.municipio }}</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Título e Subtítulo -->
+    <div class="form-card">
+      <h3 class="card-section-title">📝 Títulos</h3>
+      <div class="campo">
+        <label>Título da postagem *</label>
+        <input type="text" [(ngModel)]="titulo" placeholder="Ex: Festa da Colheita reúne famílias quilombolas" maxlength="200" />
+      </div>
+      <div class="campo">
+        <label>Subtítulo <span class="opcional">(opcional)</span></label>
+        <input type="text" [(ngModel)]="subtitulo" placeholder="Um resumo breve da notícia..." maxlength="300" />
+      </div>
+    </div>
+
+    <!-- Imagem header -->
+    <div class="form-card">
+      <h3 class="card-section-title">🖼️ Imagem Principal (Header)</h3>
+      <p class="card-hint">Esta imagem aparece no topo da postagem e nos cards de listagem.</p>
+
+      <div class="upload-area" *ngIf="!headerPreview" (click)="headerInput.click()">
+        <span class="upload-icon">📷</span>
+        <span>Clique para selecionar a imagem principal</span>
+        <span class="upload-hint">JPG, PNG, WebP</span>
+        <input #headerInput type="file" accept="image/*" (change)="onHeaderChange($event)" hidden />
+      </div>
+
+      <div class="header-preview" *ngIf="headerPreview">
+        <img [src]="headerPreview" alt="Preview do header" />
+        <button class="btn-remover-img" (click)="removerHeader()">✕ Remover</button>
+      </div>
+    </div>
+
+    <!-- Texto -->
+    <div class="form-card">
+      <h3 class="card-section-title">📄 Texto da Postagem *</h3>
+      <p class="card-hint">Para inserir um vídeo do YouTube, cole o link completo em uma linha separada.</p>
+      <textarea
+        [(ngModel)]="texto"
+        rows="16"
+        placeholder="Escreva o conteúdo da postagem aqui.&#10;&#10;Para inserir vídeo do YouTube, coloque o link em uma linha separada:&#10;https://www.youtube.com/watch?v=..."
+      ></textarea>
+    </div>
+
+    <!-- Galeria de imagens -->
+    <div class="form-card">
+      <h3 class="card-section-title">🗂️ Galeria de Imagens</h3>
+      <p class="card-hint">Adicione imagens que ilustram a postagem. Você pode adicionar quantas quiser.</p>
+
+      <div class="galeria-upload">
+        <div
+          class="galeria-item preview-item"
+          *ngFor="let p of imagensPreviews; let i = index"
+        >
+          <img [src]="p" alt="Imagem {{ i+1 }}" />
+          <button class="remove-btn" (click)="removerImagem(i)">✕</button>
+        </div>
+
+        <div class="galeria-add" (click)="imagensInput.click()">
+          <span>+ Adicionar Imagens</span>
+          <input #imagensInput type="file" accept="image/*" multiple (change)="onImagensChange($event)" hidden />
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

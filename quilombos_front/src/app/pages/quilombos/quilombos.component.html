@@ -1,0 +1,31 @@
+<section class="quilombos-section">
+  <div class="overlay"></div>
+
+  <div class="container content">
+    <h2 class="section-title text-center mt-3">Quilombos do Sertão</h2>
+
+    <p class="section-subtitle text-center">
+      Conheça histórias de resistência, cultura e identidade
+    </p>
+
+    <div class="row mt-5 g-4">
+      <div class="col-md-4" *ngFor="let quilombo of quilombos">
+        <div class="quilombo-card">
+          <div
+            class="card-image"
+            [style.backgroundImage]="'url(' + quilombo.imagem + ')'"
+          ></div>
+
+          <div class="card-content">
+            <h3>{{ quilombo.nome }}</h3>
+            <p>{{ quilombo.descricao }}</p>
+
+            <button class="btn cta-card-btn" (click)="irPara(quilombo.rota)">
+              Conhecer Quilombo →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

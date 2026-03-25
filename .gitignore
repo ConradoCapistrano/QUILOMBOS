@@ -1,0 +1,37 @@
+# Build
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Rider / VS Code
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Arquivos de publicação
+publish/
+
+# Arquivos temporários
+*.tmp
+
+# Segredos e configs locais
+appsettings.Development.json
+appsettings.Local.json
+
+# Certificados
+*.pfx
+*.key
+
+# NuGet
+*.nupkg
+packages/
+
+# OS
+.DS_Store
+Thumbs.db

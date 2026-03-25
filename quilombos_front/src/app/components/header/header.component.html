@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg custom-navbar fixed-top">
+  <div class="container">
+    <a class="navbar-brand brand-logo" routerLink="/"> Quilombos </a>
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#menu"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto gap-lg-4 align-items-lg-center">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/quilombos">Quilombos</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/historias">Histórias</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/noticias">Notícias</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="btn btn-contact" routerLink="/contato"> Contato </a>
+        </li>
+
+        <!-- ADMIN DESKTOP -->
+        <li class="nav-item d-none d-lg-flex align-items-center">
+          <a
+            class="admin-link"
+            routerLink="/admin/login"
+            title="Área administrativa"
+          >
+            <i class="bi bi-person-lock"></i>
+          </a>
+        </li>
+
+        <!-- ADMIN MOBILE (dentro do menu) -->
+        <li class="nav-item d-lg-none">
+          <a class="nav-link admin-mobile" routerLink="/admin/login">
+            <i class="bi bi-person-lock me-2"></i>
+            Área administrativa
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

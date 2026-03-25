@@ -1,0 +1,72 @@
+<section class="noticias-section">
+  <div class="container">
+    <h2 class="page-title mt-3">Notícias dos Quilombos</h2>
+    <p class="page-subtitle">Fique por dentro das histórias e acontecimentos das comunidades</p>
+
+    <!-- Filtros por quilombo -->
+    <div class="filtros-wrap">
+      <button class="filtro-btn" [class.ativo]="!quilomboFiltro" (click)="filtrarPorQuilombo()">
+        Todos
+      </button>
+      <button
+        *ngFor="let q of quilombos"
+        class="filtro-btn"
+        [class.ativo]="quilomboFiltro === q.id"
+        (click)="filtrarPorQuilombo(q.id)"
+      >
+        {{ q.nome }}
+      </button>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-wrap" *ngIf="carregando">
+      <div class="spinner"></div>
+      <span>Carregando notícias...</span>
+    </div>
+
+    <!-- Sem resultados -->
+    <div class="sem-resultados" *ngIf="!carregando && postagens.length === 0">
+      <p>Nenhuma notícia encontrada para esta comunidade.</p>
+    </div>
+
+    <!-- Grid de cards -->
+    <div class="noticias-grid" *ngIf="!carregando && postagens.length > 0">
+      <a
+        class="noticia-card"
+        *ngFor="let p of postagens"
+        [routerLink]="['/noticias', p.id]"
+      >
+        <div class="card-img-wrap">
+          <img
+            *ngIf="p.imagemHeaderUrl"
+            [src]="p.imagemHeaderUrl"
+            [alt]="p.titulo"
+            class="card-img"
+          />
+          <div class="card-img-placeholder" *ngIf="!p.imagemHeaderUrl">
+            <span>📰</span>
+          </div>
+          <span class="card-quilombo-tag">{{ p.quilomboNome }}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-date">{{ formatarData(p.dataHora) }}</div>
+          <h3 class="card-title">{{ p.titulo }}</h3>
+          <p class="card-subtitulo" *ngIf="p.subtitulo">{{ p.subtitulo }}</p>
+          <span class="card-link">Ler mais →</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Paginação -->
+    <div class="paginacao" *ngIf="totalPages > 1">
+      <button class="pag-btn" [disabled]="page === 1" (click)="irParaPagina(page - 1)">←</button>
+      <button
+        *ngFor="let p of [].constructor(totalPages); let i = index"
+        class="pag-btn"
+        [class.ativo]="page === i + 1"
+        (click)="irParaPagina(i + 1)"
+      >{{ i + 1 }}</button>
+      <button class="pag-btn" [disabled]="page === totalPages" (click)="irParaPagina(page + 1)">→</button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,110 @@
+.quilombos-section {
+  position: relative;
+  padding: 100px 0;
+  background-image: url('/assets/african-pattern-bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0.65)
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+/* TEXTOS */
+.section-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.section-subtitle {
+  color: #ddd;
+  margin-top: 10px;
+}
+
+/* CARD */
+.quilombo-card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: 0.35s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  }
+
+  &:hover .cta-card-btn {
+    background: #198754;
+    color: #fff;
+  }
+}
+
+/* IMAGEM */
+.card-image {
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.5)
+    );
+  }
+}
+
+/* CONTEÚDO */
+.card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 10px 0 20px;
+    color: #555;
+    font-size: 14px;
+    flex: 1;
+  }
+}
+
+/* BOTÃO DO CARD */
+.cta-card-btn {
+  align-self: flex-start;
+  background: #ffd65c;
+  color: #000;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 6px;
+  transition: 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}

@@ -1,0 +1,71 @@
+<section class="historias-section">
+  <div class="container">
+    <h2 class="title mt-3">Histórias dos Quilombos</h2>
+    <p class="subtitle">
+      Memórias vivas que preservam a identidade, a resistência e a cultura
+      afro-brasileira através das gerações
+    </p>
+
+    <div class="cards-grid">
+      <div
+        class="quilombo-card"
+        *ngFor="let q of quilombos; let i = index"
+        [class.active]="quilomboAtivo === q.id"
+        (click)="selecionar(q.id)"
+      >
+        <div class="card-content">
+          <h5>{{ q.nome }}</h5>
+          <div class="card-region">
+            Comunidade Quilombola • {{ q.regiao || "Região Nordeste" }}
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-year">{{ q.ano || "Séc. XIX" }}</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="historia-content" *ngIf="quilomboSelecionado">
+      <div class="content-header">
+        <h3>{{ quilomboSelecionado.nome }}</h3>
+      </div>
+
+      <div class="content-body">
+        <div class="content-text">
+          <p>{{ quilomboSelecionado.descricao }}</p>
+        </div>
+
+        <div class="content-info">
+          <div class="info-item">
+            <div class="info-label">Fundação</div>
+            <div class="info-value">
+              {{ quilomboSelecionado.ano || "Século XIX" }}
+            </div>
+            <div class="info-description">
+              Registros históricos da comunidade
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-label">Localização</div>
+            <div class="info-value">
+              {{ quilomboSelecionado.regiao || "Região Nordeste" }}
+            </div>
+            <div class="info-description">
+              {{ quilomboSelecionado.municipio || "Território tradicional" }}
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-label">Famílias</div>
+            <div class="info-value">
+              {{ quilomboSelecionado.familias || "Aproximadamente 200" }}
+            </div>
+            <div class="info-description">Comunidade ativa e preservada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

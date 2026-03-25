@@ -1,0 +1,325 @@
+// historias.component.scss
+
+.historias-section {
+  position: relative;
+  padding: 100px 20px;
+  min-height: 100vh;
+  background-color: #1a2a1f; // tom de verde mais sóbrio como fallback
+
+  // Background com a imagem fornecida
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/assets/african-pattern-bg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.15; // opacidade baixa para não competir com o conteúdo
+    z-index: 0;
+  }
+
+  // Overlay suave para garantir legibilidade
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(10, 20, 12, 0.95) 0%,
+      rgba(22, 39, 26, 0.92) 50%,
+      rgba(15, 28, 18, 0.95) 100%
+    );
+    z-index: 1;
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+// Título principal
+.title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #e8d5b5; // tom suave de palha/areia
+  text-align: center;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #b59d7a, transparent);
+  }
+}
+
+.subtitle {
+  text-align: center;
+  color: #b5a58a;
+  font-size: 18px;
+  max-width: 600px;
+  margin: 24px auto 48px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+// Grid de cards
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+// Card
+.quilombo-card {
+  background: rgba(232, 213, 181, 0.05);
+  border: 1px solid rgba(232, 213, 181, 0.15);
+  border-radius: 16px;
+  padding: 28px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  // Linha decorativa superior
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #b59d7a, #8b7355, #b59d7a, transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  &:hover {
+    background: rgba(232, 213, 181, 0.08);
+    border-color: rgba(232, 213, 181, 0.3);
+    transform: translateY(-4px);
+
+    &::before {
+      transform: translateX(100%);
+    }
+
+    .card-arrow {
+      transform: translateX(4px);
+      color: #e8d5b5;
+    }
+  }
+
+  &.active {
+    background: rgba(181, 157, 122, 0.12);
+    border-color: #b59d7a;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+
+    h5 {
+      color: #e8d5b5;
+    }
+
+    .card-arrow {
+      color: #b59d7a;
+    }
+  }
+}
+
+.card-content {
+  h5 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+    transition: color 0.3s ease;
+  }
+
+  .card-region {
+    font-size: 14px;
+    color: #b5a58a;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 20px;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      background: #b59d7a;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+  }
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .card-year {
+    font-size: 13px;
+    color: #b5a58a;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .card-arrow {
+    color: #8b7355;
+    font-size: 18px;
+    font-weight: 300;
+    transition: all 0.3s ease;
+  }
+}
+
+// Área de conteúdo expandido
+.historia-content {
+  background: rgba(26, 42, 31, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(232, 213, 181, 0.2);
+  border-radius: 24px;
+  padding: 40px;
+  margin-top: 40px;
+  animation: fadeIn 0.4s ease;
+
+  @media (max-width: 768px) {
+    padding: 24px;
+  }
+}
+
+.content-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(232, 213, 181, 0.15);
+
+  h3 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #e8d5b5;
+    margin: 0;
+  }
+}
+
+.content-body {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .content-text {
+    p {
+      color: #d4c5aa;
+      font-size: 16px;
+      line-height: 1.8;
+      margin: 0;
+      text-align: justify;
+    }
+  }
+
+  .content-info {
+    background: rgba(10, 20, 12, 0.5);
+    border-radius: 16px;
+    padding: 24px;
+
+    .info-item {
+      margin-bottom: 24px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .info-label {
+        color: #b5a58a;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+      }
+
+      .info-value {
+        color: #e8d5b5;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+
+      .info-description {
+        color: #b5a58a;
+        font-size: 14px;
+        margin-top: 4px;
+        font-style: italic;
+      }
+    }
+  }
+}
+
+// Animações
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsivo
+@media (max-width: 768px) {
+  .historias-section {
+    padding: 60px 16px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    margin: 20px auto 32px;
+  }
+
+  .quilombo-card {
+    padding: 20px;
+
+    .card-content {
+      h5 {
+        font-size: 20px;
+      }
+    }
+  }
+}
