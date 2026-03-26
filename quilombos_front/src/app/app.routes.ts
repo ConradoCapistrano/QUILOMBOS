@@ -8,15 +8,25 @@ import { PostagemDetalheComponent } from './pages/noticias/postagem-detalhe/post
 import { AdminDashboardComponent } from './pages/admin/dashboard/admin-dashboard.component';
 import { NovaPostagemComponent } from './pages/admin/nova-postagem/nova-postagem.component';
 import { authGuard } from './guards/auth.guard';
+import { ContatoComponent } from './pages/contato/contato.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'quilombos', component: QuilombosComponent },
   { path: 'historias', component: HistoriasComponent },
+  { path: 'contato', component: ContatoComponent },
   { path: 'noticias', component: NoticiasComponent },
   { path: 'noticias/:id', component: PostagemDetalheComponent },
   { path: 'admin/login', component: LoginComponent },
-  { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [authGuard] },
-  { path: 'admin/postagem/nova', component: NovaPostagemComponent, canActivate: [authGuard] },
+  {
+    path: 'admin/dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'admin/postagem/nova',
+    component: NovaPostagemComponent,
+    canActivate: [authGuard],
+  },
   { path: '**', redirectTo: '' },
 ];

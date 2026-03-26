@@ -1,0 +1,37 @@
+<section class="contato-section">
+  <div class="overlay"></div>
+
+  <div class="container content">
+    <!-- HEADER -->
+    <div class="text-center contato-header">
+      <h2>Entre em Contato</h2>
+      <p>
+        Conecte-se com as comunidades quilombolas e fortaleça essa rede de
+        cultura e resistência.
+      </p>
+    </div>
+
+    <!-- GRID DIFERENTE -->
+    <div class="contato-grid">
+      <a
+        *ngFor="let item of contatos"
+        [href]="item.link"
+        target="_blank"
+        class="contato-card"
+      >
+        <div class="card-inner">
+          <div class="icon">
+            <i class="bi" [ngClass]="item.icone"></i>
+          </div>
+
+          <div class="info">
+            <span class="label">{{ item.titulo }}</span>
+            <strong>{{ item.valor }}</strong>
+          </div>
+
+          <div class="arrow">→</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>

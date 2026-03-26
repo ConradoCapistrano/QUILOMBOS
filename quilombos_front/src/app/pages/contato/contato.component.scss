@@ -1,0 +1,129 @@
+.contato-section {
+  position: relative;
+  padding: 120px 0;
+  background-image: url('/assets/african-pattern-bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.7)
+  );
+}
+
+/* CONTEÚDO */
+.content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+
+/* HEADER */
+.contato-header {
+  max-width: 600px;
+  margin: 0 auto 60px;
+
+  h2 {
+    font-size: 38px;
+    font-weight: 800;
+  }
+
+  p {
+    margin-top: 15px;
+    color: #ccc;
+  }
+}
+
+/* GRID DIFERENTE */
+.contato-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* CARD */
+.contato-card {
+  text-decoration: none;
+  color: inherit;
+
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 22px 25px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  transition: 0.35s;
+  display: block;
+}
+
+/* CONTEÚDO INTERNO */
+.card-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ÍCONE */
+.icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: rgba(255, 214, 92, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  i {
+    font-size: 22px;
+    color: #ffd65c;
+  }
+}
+
+/* TEXTO */
+.info {
+  flex: 1;
+  margin-left: 20px;
+
+  .label {
+    display: block;
+    font-size: 13px;
+    color: #aaa;
+  }
+
+  strong {
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+/* SETA */
+.arrow {
+  font-size: 22px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+/* HOVER 🔥 */
+.contato-card:hover {
+  transform: translateX(8px) scale(1.01);
+  border-color: rgba(255, 214, 92, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.contato-card:hover .arrow {
+  transform: translateX(6px);
+  opacity: 1;
+}
+
+.contato-card:hover .icon {
+  background: #ffd65c;
+}
+
+.contato-card:hover .icon i {
+  color: #000;
+}
