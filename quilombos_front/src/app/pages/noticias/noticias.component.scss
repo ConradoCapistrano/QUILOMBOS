@@ -1,17 +1,38 @@
 .noticias-section {
-  padding: 100px 0 60px;
+  position: relative;
+  padding: 120px 0 60px;
   min-height: 100vh;
-  background: #faf8f5;
+
+  background-image: url('/assets/african-pattern-bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* OVERLAY ESCURO */
+.noticias-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 0.7)
+  );
+}
+
+/* GARANTE CONTEÚDO NA FRENTE */
+.noticias-section .container {
+  position: relative;
+  z-index: 2;
 }
 
 .page-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #2c1810;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #fff;
 }
 
 .page-subtitle {
-  color: #6c5a4e;
+  color: #ddd;
   margin-bottom: 2rem;
 }
 
@@ -23,19 +44,21 @@
 }
 
 .filtro-btn {
-  padding: 0.4rem 1.2rem;
+  padding: 0.5rem 1.4rem;
   border-radius: 999px;
-  border: 2px solid #c9882a;
+  border: 2px solid rgba(255, 214, 92, 0.5);
   background: transparent;
-  color: #c9882a;
+  color: #ffd65c;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: 0.25s;
   font-size: 0.9rem;
 
-  &:hover, &.ativo {
-    background: #c9882a;
-    color: #fff;
+  &:hover,
+  &.ativo {
+    background: #ffd65c;
+    color: #000;
+    border-color: #ffd65c;
   }
 }
 
@@ -74,56 +97,58 @@
 }
 
 .noticia-card {
-  background: #fff;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
   text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s, box-shadow 0.2s;
+  color: #fff;
+
+  transition: 0.35s;
   display: flex;
   flex-direction: column;
+}
 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.14);
-  }
+.noticia-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 214, 92, 0.4);
 }
 
 .card-img-wrap {
   position: relative;
   height: 200px;
   overflow: hidden;
-  background: #f0e8df;
 
   .card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s;
+    transition: 0.4s;
   }
 
   .card-img-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    background: linear-gradient(135deg, #f0e8df, #e0d3c8);
+    background: linear-gradient(135deg, #1c1c1c, #333);
+    color: #ffd65c;
   }
 
   .card-quilombo-tag {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #c9882a;
-    color: #fff;
+    top: 12px;
+    left: 12px;
+    background: #ffd65c;
+    color: #000;
     font-size: 0.75rem;
-    font-weight: 600;
-    padding: 3px 10px;
+    font-weight: 700;
+    padding: 4px 12px;
     border-radius: 999px;
   }
+}
+
+.noticia-card:hover .card-img {
+  transform: scale(1.06);
 }
 
 .noticia-card:hover .card-img { transform: scale(1.04); }
@@ -135,10 +160,31 @@
   flex: 1;
 }
 
-.card-date { font-size: 0.8rem; color: #9e8c82; margin-bottom: 0.4rem; }
-.card-title { font-size: 1.1rem; font-weight: 700; color: #2c1810; margin-bottom: 0.4rem; line-height: 1.4; }
-.card-subtitulo { font-size: 0.9rem; color: #6c5a4e; flex: 1; }
-.card-link { margin-top: 1rem; font-size: 0.9rem; color: #c9882a; font-weight: 600; }
+.card-date {
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-bottom: 0.4rem;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+
+.card-subtitulo {
+  font-size: 0.9rem;
+  color: #ccc;
+  flex: 1;
+}
+
+.card-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #ffd65c;
+  font-weight: 600;
+}
 
 .paginacao {
   display: flex;
@@ -150,19 +196,23 @@
     width: 38px;
     height: 38px;
     border-radius: 8px;
-    border: 2px solid #e0d3c8;
-    background: #fff;
-    color: #2c1810;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: transparent;
+    color: #fff;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: 0.25s;
 
-    &:hover:not(:disabled), &.ativo {
-      background: #c9882a;
-      border-color: #c9882a;
-      color: #fff;
+    &:hover:not(:disabled),
+    &.ativo {
+      background: #ffd65c;
+      border-color: #ffd65c;
+      color: #000;
     }
 
-    &:disabled { opacity: 0.4; cursor: not-allowed; }
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
   }
 }
