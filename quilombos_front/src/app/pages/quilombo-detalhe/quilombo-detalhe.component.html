@@ -1,0 +1,123 @@
+<section class="quilombo-detail" *ngIf="quilombo">
+  <!-- HERO COM EFEITO DE TEXTURA -->
+  <div class="hero" [style.backgroundImage]="'url(' + quilombo.imagem + ')'">
+    <div class="hero-texture"></div>
+    <div class="hero-gradient"></div>
+
+    <div class="container hero-container">
+      <button class="back-btn" (click)="voltar()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M19 12H5M12 19L5 12L12 5"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+        <span>Voltar</span>
+      </button>
+
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>Comunidade Tradicional</span>
+      </div>
+
+      <h1 class="hero-title">{{ quilombo.nome }}</h1>
+      <p class="hero-subtitle">
+        História, cultura e resistência que ecoam no sertão
+      </p>
+
+      <div class="hero-scroll">
+        <span>Desça para conhecer</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M12 5V19M12 19L5 12M12 19L19 12"
+            stroke="currentColor"
+            stroke-width="2"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO COM ACORDEÃO ARTESANAL -->
+  <div class="content">
+    <div class="container content-container">
+      <!-- Introdução com linha decorativa -->
+      <div class="intro">
+        <div class="intro-line"></div>
+        <p class="intro-text">
+          No coração do sertão pernambucano, a comunidade
+          {{ quilombo.nome }} mantém vivas as tradições de seus antepassados.
+          Cada história, cada canto e cada prática carrega séculos de
+          resistência.
+        </p>
+        <div class="intro-decoration">
+          <span>✦</span>
+          <span>✦</span>
+          <span>✦</span>
+        </div>
+      </div>
+
+      <!-- Acordeão com visual único -->
+      <div class="accordion-wrapper">
+        <div
+          *ngFor="let sec of secoes; let i = index"
+          class="accordion-card"
+          [class.active]="ativo === i"
+        >
+          <button
+            class="accordion-trigger"
+            (click)="toggle(i)"
+            [attr.aria-expanded]="ativo === i"
+          >
+            <div class="trigger-icon">
+              <span class="icon-number">{{
+                (i + 1).toString().padStart(2, "0")
+              }}</span>
+              <span class="icon-symbol">{{ ativo === i ? "—" : "+" }}</span>
+            </div>
+            <h2 class="trigger-title">{{ sec.titulo }}</h2>
+          </button>
+
+          <div class="accordion-content" [class.expanded]="ativo === i">
+            <div class="content-inner">
+              <div class="content-quote">"</div>
+              <p class="content-text">{{ sec.conteudo }}</p>
+              <div class="content-footer">
+                <span class="footer-signature"
+                  >— {{ quilombo.nome }}, memória viva</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rodapé da página com citação -->
+      <div class="footer-note">
+        <div class="note-decoration">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M4 4L20 20M20 4L4 20"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+            <circle
+              cx="12"
+              cy="12"
+              r="9"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+          </svg>
+        </div>
+        <p class="note-text">
+          "A terra que a gente planta é a mesma que nossos avós plantaram. O
+          suor é o mesmo, a luta é a mesma, a esperança também."
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

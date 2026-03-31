@@ -13,6 +13,13 @@ import { ContatoComponent } from './pages/contato/contato.component';
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'quilombos', component: QuilombosComponent },
+  {
+    path: 'quilombos/:id',
+    loadComponent: () =>
+      import('./pages/quilombo-detalhe/quilombo-detalhe.component').then(
+        (m) => m.QuilomboDetalheComponent,
+      ),
+  },
   { path: 'historias', component: HistoriasComponent },
   { path: 'contato', component: ContatoComponent },
   { path: 'noticias', component: NoticiasComponent },

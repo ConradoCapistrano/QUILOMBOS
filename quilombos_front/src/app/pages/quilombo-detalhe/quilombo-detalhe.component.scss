@@ -1,0 +1,473 @@
+// Paleta de cores com alma nordestina
+$terracota: #cd5c3c;
+$barro: #9b4b2c;
+$couro: #6b3e1a;
+$sertao: #e6b17e;
+$poeira: #d4c4b0;
+$noite: #1a120b;
+$texto-claro: #f5ede4;
+$texto-meio: #c9b6a0;
+$texto-escuro: #8b7355;
+
+// Tipografia artesanal
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+.quilombo-detail {
+  min-height: 100vh;
+  background: $noite;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ========== HERO COM TEXTURA ORGÂNICA ========== */
+.hero {
+  height: 80vh;
+  min-height: 600px;
+  background-size: cover;
+  background-position: center 30%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.1) 0px,
+      rgba(0, 0, 0, 0.1) 2px,
+      transparent 2px,
+      transparent 8px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+.hero-texture {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0 L30 60 M0 30 L60 30' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(26, 18, 11, 0.95) 100%
+  );
+  z-index: 0;
+}
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba($couro, 0.3);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba($sertao, 0.3);
+  color: $texto-claro;
+  padding: 0.5rem 1rem;
+  border-radius: 40px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 2rem;
+
+  &:hover {
+    background: rgba($terracota, 0.4);
+    border-color: $sertao;
+    transform: translateX(-3px);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  padding: 0.25rem 0.75rem;
+  border-radius: 40px;
+  margin-bottom: 1.5rem;
+  width: fit-content;
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    background: $sertao;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  span {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $texto-meio;
+  }
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: $texto-claro;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: $texto-meio;
+  line-height: 1.5;
+  margin-bottom: 3rem;
+  max-width: 500px;
+}
+
+.hero-scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: $texto-meio;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  animation: bounce 2s infinite;
+  cursor: pointer;
+
+  svg {
+    transition: transform 0.2s;
+  }
+}
+
+/* ========== CONTEÚDO PRINCIPAL ========== */
+.content {
+  background: $noite;
+  position: relative;
+  margin-top: -2rem;
+  border-radius: 2rem 2rem 0 0;
+  padding: 3rem 0 5rem;
+}
+
+.content-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ========== INTRODUÇÃO ARTESANAL ========== */
+.intro {
+  margin-bottom: 4rem;
+  text-align: center;
+  position: relative;
+}
+
+.intro-line {
+  width: 60px;
+  height: 2px;
+  background: $terracota;
+  margin: 0 auto 1.5rem;
+  opacity: 0.5;
+}
+
+.intro-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: $texto-meio;
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.intro-decoration {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  color: $terracota;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+
+/* ========== ACORDEÃO COM ALMA ========== */
+.accordion-wrapper {
+  margin: 3rem 0;
+}
+
+.accordion-card {
+  margin-bottom: 1rem;
+  border: 1px solid rgba($poeira, 0.15);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: rgba($sertao, 0.3);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  &.active {
+    border-color: $sertao;
+    background: rgba($couro, 0.1);
+  }
+}
+
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+
+  &:hover {
+    .trigger-title {
+      color: $sertao;
+    }
+  }
+}
+
+.trigger-icon {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-shrink: 0;
+
+  .icon-number {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: $texto-escuro;
+    font-family: monospace;
+  }
+
+  .icon-symbol {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: $sertao;
+    transition: transform 0.2s;
+  }
+}
+
+.trigger-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: $texto-claro;
+  margin: 0;
+  transition: color 0.2s;
+  letter-spacing: -0.3px;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+
+  &.expanded {
+    max-height: 800px;
+  }
+}
+
+.content-inner {
+  padding: 0 1.5rem 1.5rem 4rem;
+  position: relative;
+}
+
+.content-quote {
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  font-size: 3rem;
+  font-family: 'Playfair Display', serif;
+  color: rgba($sertao, 0.2);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.content-text {
+  color: $texto-meio;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+}
+
+.content-footer {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed rgba($poeira, 0.2);
+
+  .footer-signature {
+    font-size: 0.7rem;
+    color: $texto-escuro;
+    font-style: italic;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* ========== RODAPÉ COM CITAÇÃO ========== */
+.footer-note {
+  margin-top: 4rem;
+  padding: 2rem;
+  text-align: center;
+  background: rgba($couro, 0.1);
+  border-radius: 1.5rem;
+  border: 1px solid rgba($sertao, 0.2);
+  position: relative;
+}
+
+.note-decoration {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: $noite;
+  padding: 0 0.5rem;
+
+  svg {
+    color: $sertao;
+    opacity: 0.5;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.note-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: $texto-meio;
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 0.75rem;
+}
+
+.note-author {
+  font-size: 0.75rem;
+  color: $texto-escuro;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ========== ANIMAÇÕES ========== */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+/* ========== RESPONSIVIDADE ========== */
+@media (max-width: 768px) {
+  .hero {
+    height: 60vh;
+    min-height: 500px;
+  }
+
+  .hero-container {
+    padding: 0 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .content {
+    margin-top: -1rem;
+    padding: 2rem 0 3rem;
+  }
+
+  .content-container {
+    padding: 0 1.25rem;
+  }
+
+  .intro-text {
+    font-size: 1rem;
+  }
+
+  .accordion-trigger {
+    padding: 1rem;
+  }
+
+  .trigger-title {
+    font-size: 1rem;
+  }
+
+  .trigger-icon {
+    .icon-number {
+      font-size: 0.6rem;
+    }
+    .icon-symbol {
+      font-size: 1rem;
+    }
+  }
+
+  .content-inner {
+    padding: 0 1rem 1rem 2.5rem;
+  }
+
+  .content-quote {
+    left: 0;
+    font-size: 2rem;
+  }
+
+  .footer-note {
+    padding: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .note-text {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-container {
+    max-width: 700px;
+  }
+
+  .content-container {
+    max-width: 700px;
+  }
+}
