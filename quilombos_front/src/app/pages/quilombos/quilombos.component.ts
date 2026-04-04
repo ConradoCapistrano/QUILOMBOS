@@ -1,40 +1,40 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { QuilomboService, Quilombo } from '../../services/quilombo.service';
 
 @Component({
   selector: 'app-quilombos',
   templateUrl: './quilombos.component.html',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, RouterLink],
   styleUrls: ['./quilombos.component.scss'],
 })
-export class QuilombosComponent {
-  constructor(private router: Router) {}
+export class QuilombosComponent implements OnInit {
+  quilombos: Quilombo[] = [];
+  carregando = true;
 
-  quilombos = [
-    {
-      nome: 'Riacho dos Porcos',
-      descricao:
-        'Comunidade marcada pela resistência e preservação cultural no sertão.',
-      imagem: 'assets/riacho.png',
-      rota: '/quilombos/riacho',
-    },
-    {
-      nome: 'Severo',
-      descricao:
-        'História de luta e identidade construída ao longo de gerações.',
-      imagem: 'assets/severo.png',
-      rota: '/quilombos/severo',
-    },
-    {
-      nome: 'Buenos Aires',
-      descricao: 'Tradições vivas e conexão forte com suas raízes ancestrais.',
-      imagem: 'assets/bueno.png',
-      rota: '/quilombos/buenos',
-    },
-  ];
+  constructor(
+    private router: Router,
+    private quilomboService: QuilomboService
+  ) {}
 
-  irPara(rota: string) {
-    this.router.navigate([rota]);
+  ngOnInit(): void {
+    this.carregar();
+  }
+
+  carregar(): void {
+    this.carregando = true;
+    this.quilomboService.getAll().subscribe({
+      next: (data) => {
+        this.quilombos = data;
+        this.carregando = false;
+      },
+      error: () => this.carregando = false
+    });
+  }
+
+  irPara(id: number) {
+    this.router.navigate(['/quilombos', id]);
   }
 }

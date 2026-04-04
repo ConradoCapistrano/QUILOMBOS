@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using quilombos_api.Data;
 using quilombos_api.DTOs;
+using quilombos_api.Models;
 
 namespace quilombos_api.Controllers;
 
@@ -18,7 +19,7 @@ public class QuilombosController : ControllerBase
     {
         var quilombos = await _db.Quilombos
             .OrderBy(q => q.Codigo)
-            .Select(q => new QuilomboDto(q.Id, q.Codigo, q.Nome, q.Regiao, q.Municipio, q.Ano, q.Familias, q.Descricao))
+            .Select(q => new QuilomboDto(q.Id, q.Codigo, q.Nome, q.Regiao, q.Municipio, q.Ano, q.Familias, q.Descricao, q.ImagemUrl, q.Historia, q.Cultura, q.Territorio))
             .ToListAsync();
         return Ok(quilombos);
     }
@@ -28,7 +29,7 @@ public class QuilombosController : ControllerBase
     {
         var q = await _db.Quilombos.FindAsync(id);
         if (q == null) return NotFound();
-        return Ok(new QuilomboDto(q.Id, q.Codigo, q.Nome, q.Regiao, q.Municipio, q.Ano, q.Familias, q.Descricao));
+        return Ok(new QuilomboDto(q.Id, q.Codigo, q.Nome, q.Regiao, q.Municipio, q.Ano, q.Familias, q.Descricao, q.ImagemUrl, q.Historia, q.Cultura, q.Territorio));
     }
 
     [HttpPost]
@@ -44,11 +45,15 @@ public class QuilombosController : ControllerBase
             Municipio = dto.Municipio,
             Ano = dto.Ano,
             Familias = dto.Familias,
-            Descricao = dto.Descricao
+            Descricao = dto.Descricao,
+            ImagemUrl = dto.ImagemUrl,
+            Historia = dto.Historia,
+            Cultura = dto.Cultura,
+            Territorio = dto.Territorio
         };
         _db.Quilombos.Add(quilombo);
         await _db.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetById), new { id = quilombo.Id }, new QuilomboDto(quilombo.Id, quilombo.Codigo, quilombo.Nome, quilombo.Regiao, quilombo.Municipio, quilombo.Ano, quilombo.Familias, quilombo.Descricao));
+        return CreatedAtAction(nameof(GetById), new { id = quilombo.Id }, new QuilomboDto(quilombo.Id, quilombo.Codigo, quilombo.Nome, quilombo.Regiao, quilombo.Municipio, quilombo.Ano, quilombo.Familias, quilombo.Descricao, quilombo.ImagemUrl, quilombo.Historia, quilombo.Cultura, quilombo.Territorio));
     }
 
     [HttpPut("{id}")]
@@ -64,9 +69,13 @@ public class QuilombosController : ControllerBase
         quilombo.Ano = dto.Ano;
         quilombo.Familias = dto.Familias;
         quilombo.Descricao = dto.Descricao;
+        quilombo.ImagemUrl = dto.ImagemUrl;
+        quilombo.Historia = dto.Historia;
+        quilombo.Cultura = dto.Cultura;
+        quilombo.Territorio = dto.Territorio;
 
         await _db.SaveChangesAsync();
-        return Ok(new QuilomboDto(quilombo.Id, quilombo.Codigo, quilombo.Nome, quilombo.Regiao, quilombo.Municipio, quilombo.Ano, quilombo.Familias, quilombo.Descricao));
+        return Ok(new QuilomboDto(quilombo.Id, quilombo.Codigo, quilombo.Nome, quilombo.Regiao, quilombo.Municipio, quilombo.Ano, quilombo.Familias, quilombo.Descricao, quilombo.ImagemUrl, quilombo.Historia, quilombo.Cultura, quilombo.Territorio));
     }
 
     [HttpDelete("{id}")]

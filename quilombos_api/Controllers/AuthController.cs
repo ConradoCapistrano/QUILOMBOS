@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using quilombos_api.Data;
 using quilombos_api.DTOs;
+using quilombos_api.Models;
 
 namespace quilombos_api.Controllers;
 
@@ -46,7 +47,7 @@ public class AuthController : ControllerBase
 
         var claims = new[]
         {
-            new Claim(ClaimTypes.Name, admin.Usuario),
+            new Claim(ClaimTypes.Name, admin!.Usuario),
             new Claim("adminId", admin.Id.ToString()),
         };
 

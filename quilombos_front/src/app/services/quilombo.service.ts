@@ -12,6 +12,10 @@ export interface Quilombo {
   ano?: string;
   familias?: string;
   descricao?: string;
+  imagemUrl?: string;
+  historia?: string;
+  cultura?: string;
+  territorio?: string;
 }
 
 @Injectable({

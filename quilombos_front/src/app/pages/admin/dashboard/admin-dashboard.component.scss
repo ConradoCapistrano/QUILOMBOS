@@ -88,13 +88,50 @@
   .sidebar-nav {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
     flex: 1;
   }
 
-  .btn-novo {
-    background: linear-gradient(135deg, #ffd65c 0%, #ffcc33 100%);
+  .nav-link-btn {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: left;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 12px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-link-btn:hover {
+    color: #ffd65c;
+    background: rgba(255, 214, 92, 0.1);
+    transform: translateX(5px);
+  }
+
+  .nav-link-btn.active {
     color: #1f3d2b;
+    background: #ffd65c;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(255, 214, 92, 0.2);
+  }
+
+  .nav-divider {
+    border: none;
+    height: 1px;
+    background: rgba(255, 215, 92, 0.15);
+    margin: 15px 0;
+  }
+
+  .btn-novo {
+    background: linear-gradient(135deg, #1f3d2b 0%, #2e5c41 100%);
+    color: #ffd65c;
     padding: 12px 20px;
     border-radius: 12px;
     text-align: center;
@@ -106,9 +143,15 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    border: none;
+    border: 1px solid #ffd65c;
     cursor: pointer;
-    margin-bottom: 8px;
+    margin-bottom: 20px;
+  }
+
+  .btn-novo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(31, 61, 43, 0.4);
+    background: #1f3d2b;
   }
 
   .btn-novo:hover {
@@ -690,5 +733,150 @@
 
   .post-titulo {
     font-size: 1.2rem;
+  }
+}
+/* ============================================
+   LISTA DE QUILOMBOS
+   ============================================ */
+.quilombos-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 25px;
+}
+
+.quilombo-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 215, 92, 0.15);
+  border-radius: 24px;
+  padding: 24px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.quilombo-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 4px; height: 100%;
+  background: #ffd65c;
+  opacity: 0.5;
+}
+
+.quilombo-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #ffd65c;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.quilombo-card:hover::before {
+  opacity: 1;
+}
+
+.q-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.q-id {
+  background: rgba(255, 214, 92, 0.15);
+  color: #ffd65c;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.q-nome {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.q-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 16px;
+}
+
+.q-meta span {
+  color: rgba(255,255,255,0.8);
+  font-size: 0.85rem;
+}
+
+.q-meta strong {
+  color: #ffd65c;
+  font-weight: 600;
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.q-desc {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.q-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 15px;
+}
+
+.btn-edit {
+  flex: 1;
+  background: #ffd65c;
+  color: #1f3d2b;
+  border: none;
+  padding: 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-edit:hover {
+  background: #ffcc33;
+  transform: translateY(-2px);
+}
+
+.btn-del-outline {
+  flex: 1;
+  background: transparent;
+  border: 1.5px solid #c0392b;
+  color: #e07070;
+  padding: 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-del-outline:hover {
+  background: #c0392b;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 767px) {
+  .quilombos-lista {
+    grid-template-columns: 1fr;
   }
 }

@@ -43,7 +43,11 @@ public record QuilomboDto(
     string? Municipio,
     string? Ano,
     string? Familias,
-    string? Descricao
+    string? Descricao,
+    string? ImagemUrl,
+    string? Historia,
+    string? Cultura,
+    string? Territorio
 );
 
 public record QuilomboInputDto(
@@ -52,5 +56,9 @@ public record QuilomboInputDto(
     string? Municipio,
     string? Ano,
     string? Familias,
-    string? Descricao
+    string? Descricao,
+    string? ImagemUrl,
+    string? Historia,
+    string? Cultura,
+    string? Territorio
 );

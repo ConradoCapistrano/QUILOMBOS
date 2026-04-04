@@ -1,6 +1,6 @@
 <section class="quilombo-detail" *ngIf="quilombo">
   <!-- HERO COM EFEITO DE TEXTURA -->
-  <div class="hero" [style.backgroundImage]="'url(' + quilombo.imagem + ')'">
+  <div class="hero" [style.backgroundImage]="'url(' + (quilombo.imagemUrl || 'assets/default.png') + ')'">
     <div class="hero-texture"></div>
     <div class="hero-gradient"></div>
 
