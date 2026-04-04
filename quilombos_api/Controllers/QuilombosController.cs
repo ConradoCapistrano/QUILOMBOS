@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using quilombos_api.Data;
 using quilombos_api.DTOs;
+using quilombos_api.Models;
 
 namespace quilombos_api.Controllers;
 
