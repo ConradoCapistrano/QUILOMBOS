@@ -3,10 +3,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
-export interface QuilomboDto {
-  id: number; codigo: number; nome: string; regiao?: string; municipio?: string;
-}
-
 export interface PostagemResumoDto {
   id: number; quilomboId: number; quilomboNome: string;
   titulo: string; subtitulo?: string; dataHora: string; imagemHeaderUrl?: string;
@@ -47,15 +43,6 @@ export class PostagensService {
 
   deletar(id: number): Observable<void> {
     return this.http.delete<void>(`${this.base}/${id}`);
-  }
-}
-
-@Injectable({ providedIn: 'root' })
-export class QuilombosService {
-  constructor(private http: HttpClient) {}
-
-  listar(): Observable<QuilomboDto[]> {
-    return this.http.get<QuilomboDto[]>(`${environment.apiUrl}/quilombos`);
   }
 }
 

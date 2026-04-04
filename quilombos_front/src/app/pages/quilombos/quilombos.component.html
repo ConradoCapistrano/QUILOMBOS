@@ -13,14 +13,14 @@
         <div class="quilombo-card">
           <div
             class="card-image"
-            [style.backgroundImage]="'url(' + quilombo.imagem + ')'"
+            [style.backgroundImage]="'url(' + (quilombo.imagemUrl || 'assets/default.png') + ')'"
           ></div>
 
           <div class="card-content">
             <h3>{{ quilombo.nome }}</h3>
             <p>{{ quilombo.descricao }}</p>
 
-            <button class="btn cta-card-btn" (click)="irPara(quilombo.rota)">
+            <button class="btn cta-card-btn" [routerLink]="['/quilombos', quilombo.id]">
               Conhecer Quilombo →
             </button>
           </div>

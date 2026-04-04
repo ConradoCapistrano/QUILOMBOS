@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { PostagensService, PostagemResumoDto, PostagemResumoDto as PR } from '../../services/api.service';
-import { QuilombosService, QuilomboDto } from '../../services/api.service';
+import { PostagensService, PostagemResumoDto } from '../../services/api.service';
+import { QuilomboService, Quilombo } from '../../services/quilombo.service';
 
 @Component({
   selector: 'app-noticias',
@@ -13,7 +13,7 @@ import { QuilombosService, QuilomboDto } from '../../services/api.service';
   styleUrls: ['./noticias.component.scss']
 })
 export class NoticiasComponent implements OnInit {
-  quilombos: QuilomboDto[] = [];
+  quilombos: Quilombo[] = [];
   postagens: PostagemResumoDto[] = [];
   total = 0;
   page = 1;
@@ -23,11 +23,11 @@ export class NoticiasComponent implements OnInit {
 
   constructor(
     private postagensService: PostagensService,
-    private quilombosService: QuilombosService
+    private quilomboService: QuilomboService
   ) {}
 
   ngOnInit(): void {
-    this.quilombosService.listar().subscribe((q: import('../../services/api.service').QuilomboDto[]) => this.quilombos = q);
+    this.quilomboService.getAll().subscribe((q: Quilombo[]) => this.quilombos = q);
     this.carregar();
   }
 

@@ -1,0 +1,90 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-header">
+      <div class="header-content">
+        <a routerLink="/admin" class="back-link">← Voltar</a>
+        <h1>{{ isEdit ? 'Editar Quilombo' : 'Novo Quilombo' }}</h1>
+        <p class="subtitle">Gerencie as informações detalhadas desta comunidade quilombola.</p>
+      </div>
+      <button class="btn-save" [disabled]="salvando" (click)="salvar()">
+        {{ salvando ? 'Salvando...' : (isEdit ? 'Atualizar Quilombo' : 'Salvar Quilombo') }}
+      </button>
+    </div>
+
+    <div class="form-grid">
+      <!-- Informações Básicas -->
+      <section class="form-section">
+        <h3>Informações Básicas</h3>
+        <div class="field">
+          <label for="nome">Nome do Quilombo *</label>
+          <input type="text" id="nome" [(ngModel)]="quilombo.nome" name="nome" placeholder="Ex: Riacho dos Porcos">
+        </div>
+        
+        <div class="row">
+          <div class="field">
+            <label for="regiao">Região</label>
+            <input type="text" id="regiao" [(ngModel)]="quilombo.regiao" name="regiao" placeholder="Ex: Pernambuco">
+          </div>
+          <div class="field">
+            <label for="municipio">Município</label>
+            <input type="text" id="municipio" [(ngModel)]="quilombo.municipio" name="municipio" placeholder="Ex: Sertânia">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="ano">Ano de Origem</label>
+            <input type="text" id="ano" [(ngModel)]="quilombo.ano" name="ano" placeholder="Ex: Século XIX">
+          </div>
+          <div class="field">
+            <label for="familias">Número de Famílias</label>
+            <input type="text" id="familias" [(ngModel)]="quilombo.familias" name="familias" placeholder="Ex: 50 famílias">
+          </div>
+        </div>
+      </section>
+
+      <!-- Mídia e Resumo -->
+      <section class="form-section">
+        <h3>Mídia e Descrição Curta</h3>
+        <div class="field">
+          <label for="imagemUrl">URL da Imagem de Capa</label>
+          <input type="text" id="imagemUrl" [(ngModel)]="quilombo.imagemUrl" name="imagemUrl" placeholder="Link da imagem (assets/...)">
+          <div class="preview-img" *ngIf="quilombo.imagemUrl">
+            <img [src]="quilombo.imagemUrl" alt="Preview">
+          </div>
+        </div>
+        <div class="field">
+          <label for="descricao">Descrição Curta (Resumo)</label>
+          <textarea id="descricao" [(ngModel)]="quilombo.descricao" name="descricao" rows="3" placeholder="Um pequeno parágrafo sobre o quilombo..."></textarea>
+        </div>
+      </section>
+
+      <!-- Conteúdo Detalhado -->
+      <section class="form-section full-width">
+        <h3>História, Cultura e Território</h3>
+        
+        <div class="field">
+          <label for="historia">História e Resistência</label>
+          <textarea id="historia" [(ngModel)]="quilombo.historia" name="historia" rows="8" placeholder="Conte a história da fundação e resistência..."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="cultura">Saberes e Fazeres (Cultura)</label>
+          <textarea id="cultura" [(ngModel)]="quilombo.cultura" name="cultura" rows="8" placeholder="Descreva as tradições, religiosidade e cultura..."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="territorio">Terra e Pertencimento (Território)</label>
+          <textarea id="territorio" [(ngModel)]="quilombo.territorio" name="territorio" rows="8" placeholder="Descreva a relação com a terra e o território..."></textarea>
+        </div>
+      </section>
+    </div>
+
+    <div class="form-footer">
+      <button class="btn-cancel" routerLink="/admin">Cancelar</button>
+      <button class="btn-save" [disabled]="salvando" (click)="salvar()">
+        {{ salvando ? 'Salvando...' : (isEdit ? 'Atualizar Quilombo' : 'Salvar Quilombo') }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { PostagensService } from '../../../services/api.service';
-import { QuilombosService, QuilomboDto } from '../../../services/api.service';
+import { QuilomboService, Quilombo } from '../../../services/quilombo.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./nova-postagem.component.scss']
 })
 export class NovaPostagemComponent implements OnInit {
-  quilombos: QuilomboDto[] = [];
+  quilombos: Quilombo[] = [];
   quilomboId: number = 0;
   titulo = '';
   subtitulo = '';
@@ -30,12 +30,12 @@ export class NovaPostagemComponent implements OnInit {
 
   constructor(
     private postagensService: PostagensService,
-    private quilombosService: QuilombosService,
+    private quilomboService: QuilomboService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.quilombosService.listar().subscribe((q: import('../../../services/api.service').QuilomboDto[]) => {
+    this.quilomboService.getAll().subscribe((q: Quilombo[]) => {
       this.quilombos = q;
       if (q.length > 0) this.quilomboId = q[0].id;
     });

@@ -35,5 +35,15 @@ export const routes: Routes = [
     component: NovaPostagemComponent,
     canActivate: [authGuard],
   },
+  {
+    path: 'admin/quilombo/novo',
+    loadComponent: () => import('./pages/admin/quilombo-form/admin-quilombo-form.component').then(m => m.AdminQuilomboFormComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'admin/quilombo/editar/:id',
+    loadComponent: () => import('./pages/admin/quilombo-form/admin-quilombo-form.component').then(m => m.AdminQuilomboFormComponent),
+    canActivate: [authGuard]
+  },
   { path: '**', redirectTo: '' },
 ];
