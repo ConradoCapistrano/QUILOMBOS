@@ -154,12 +154,6 @@
     background: #1f3d2b;
   }
 
-  .btn-novo:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 214, 92, 0.3);
-    background: linear-gradient(135deg, #ffe085 0%, #ffd65c 100%);
-  }
-
   .sidebar-nav .nav-link {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
@@ -181,6 +175,30 @@
     color: #ffd65c;
     background: rgba(255, 214, 92, 0.1);
     transform: translateX(5px);
+  }
+
+  /* Botão Redefinir Senha */
+  .btn-redefinir {
+    width: 100%;
+    background: rgba(255, 214, 92, 0.1);
+    border: 1px solid rgba(255, 214, 92, 0.3);
+    padding: 12px 15px;
+    border-radius: 12px;
+    color: #ffd65c;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+  }
+
+  .btn-redefinir:hover {
+    background: rgba(255, 214, 92, 0.2);
+    transform: translateY(-2px);
   }
 
   .sidebar-bottom {
@@ -228,10 +246,9 @@
 }
 
 /* ============================================
-   MOBILE (< 992px) - HEADER FIXO COM AÇÕES
+   MOBILE (< 992px)
    ============================================ */
 @media (max-width: 991px) {
-  /* Sidebar se transforma em header fixo superior */
   .dashboard-header {
     position: fixed;
     top: 80px;
@@ -253,7 +270,6 @@
     flex-wrap: wrap;
   }
 
-  /* Topo com título e total de posts */
   .sidebar-top {
     display: flex;
     align-items: baseline;
@@ -281,16 +297,15 @@
     margin: 0;
   }
 
-  /* Navegação horizontal com as ações principais */
   .sidebar-nav {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 12px;
     margin: 0;
+    flex-wrap: wrap;
   }
 
-  /* Botão Nova Postagem - DESTACADO e sempre visível */
   .btn-novo {
     background: linear-gradient(135deg, #ffd65c 0%, #ffcc33 100%);
     color: #1f3d2b;
@@ -307,16 +322,6 @@
     white-space: nowrap;
   }
 
-  .btn-novo::before {
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
-
-  .btn-novo:active {
-    transform: scale(0.98);
-  }
-
-  /* Link Ver site */
   .sidebar-nav .nav-link {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
@@ -332,15 +337,21 @@
     background: rgba(255, 255, 255, 0.05);
   }
 
-  .sidebar-nav .nav-link::before {
-    font-size: 0.9rem;
+  .btn-redefinir {
+    background: rgba(255, 214, 92, 0.15);
+    border: 1px solid rgba(255, 214, 92, 0.3);
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #ffd65c;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
   }
 
-  .sidebar-nav .nav-link:active {
-    background: rgba(255, 214, 92, 0.2);
-  }
-
-  /* Botão Sair */
   .sidebar-bottom {
     margin: 0;
     padding: 0;
@@ -363,19 +374,9 @@
     white-space: nowrap;
   }
 
-  .btn-sair::before {
-    font-size: 0.9rem;
-  }
-
-  .btn-sair:active {
-    background: #c0392b;
-    color: #fff;
-  }
-
-  /* Conteúdo principal - ajuste para o header fixo */
   .dashboard-content {
     margin-left: 0;
-    margin-top: 150px; /* Espaço para o header fixo */
+    margin-top: 150px;
     position: relative;
     z-index: 1;
     padding: 20px 16px 40px 16px;
@@ -384,14 +385,13 @@
 }
 
 /* ============================================
-   CONTEÚDO - COMUM PARA TODOS OS TAMANHOS
+   CONTEÚDO - COMUM
    ============================================ */
 .dashboard-content .container {
   max-width: 1400px;
   margin: 0 auto;
 }
 
-/* Loading Spinner */
 .loading-wrap {
   display: flex;
   justify-content: center;
@@ -412,14 +412,12 @@
   to { transform: rotate(360deg); }
 }
 
-/* Lista de Postagens */
 .postagens-lista {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* Card de Postagem */
 .post-row {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
@@ -439,7 +437,6 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Thumbnail */
 .post-thumb {
   width: 100px;
   height: 70px;
@@ -468,7 +465,6 @@
   background: rgba(255, 214, 92, 0.1);
 }
 
-/* Informações */
 .post-info {
   flex: 1;
   min-width: 0;
@@ -506,7 +502,6 @@
   margin-top: 6px;
 }
 
-/* Ações */
 .post-actions {
   display: flex;
   gap: 12px;
@@ -568,7 +563,6 @@
   box-shadow: 0 4px 12px rgba(192, 57, 43, 0.3);
 }
 
-/* Estado sem posts */
 .sem-posts {
   text-align: center;
   padding: 60px 20px;
@@ -589,155 +583,7 @@
   padding: 12px 28px;
 }
 
-/* ============================================
-   RESPONSIVIDADE MOBILE AVANÇADA
-   ============================================ */
-
-/* Tablet (entre 768px e 991px) */
-@media (min-width: 768px) and (max-width: 991px) {
-  .sidebar-content {
-    flex-wrap: nowrap;
-    justify-content: space-between;
-  }
-
-  .dashboard-content {
-    margin-top: 140px;
-  }
-}
-
-/* Mobile (até 767px) */
-@media (max-width: 767px) {
-  .dashboard-header {
-    padding: 12px;
-  }
-
-  .sidebar-content {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-
-  .sidebar-top {
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .sidebar-nav {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .btn-novo {
-    flex: 1;
-    justify-content: center;
-  }
-
-  .sidebar-nav .nav-link {
-    flex: 1;
-    justify-content: center;
-  }
-
-  .sidebar-bottom {
-    width: 100%;
-  }
-
-  .btn-sair {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .dashboard-content {
-    margin-top: 180px;
-    padding: 16px 12px;
-  }
-
-  /* Cards em mobile */
-  .post-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 16px;
-  }
-
-  .post-thumb {
-    width: 100%;
-    height: 180px;
-  }
-
-  .post-info {
-    width: 100%;
-  }
-
-  .post-titulo {
-    font-size: 1rem;
-  }
-
-  .post-actions {
-    width: 100%;
-    justify-content: flex-end;
-  }
-
-  .btn-ver, .btn-del {
-    padding: 8px 16px;
-    font-size: 0.8rem;
-  }
-}
-
-/* Mobile pequeno (até 480px) */
-@media (max-width: 480px) {
-  .dashboard-content {
-    padding: 12px;
-    margin-top: 200px;
-  }
-
-  .post-row {
-    padding: 12px;
-  }
-
-  .post-thumb {
-    height: 150px;
-  }
-
-  .post-quilombo {
-    font-size: 0.7rem;
-  }
-
-  .post-titulo {
-    font-size: 0.95rem;
-  }
-
-  .btn-novo, .sidebar-nav .nav-link, .btn-sair {
-    font-size: 0.75rem;
-    padding: 6px 12px;
-  }
-
-  .btn-novo::before {
-    font-size: 1rem;
-  }
-}
-
-/* Desktop grande (opcional) */
-@media (min-width: 1600px) {
-  .dashboard-content .container {
-    max-width: 1400px;
-  }
-
-  .post-row {
-    padding: 24px;
-  }
-
-  .post-thumb {
-    width: 120px;
-    height: 80px;
-  }
-
-  .post-titulo {
-    font-size: 1.2rem;
-  }
-}
-/* ============================================
-   LISTA DE QUILOMBOS
-   ============================================ */
+/* QUILOMBOS */
 .quilombos-lista {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -875,8 +721,411 @@
   transform: translateY(-2px);
 }
 
+/* ============================================
+   MODAL DE REDEFINIÇÃO DE SENHA
+   ============================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-container {
+  background: #1a120b;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 460px;
+  border: 1px solid rgba(255, 214, 92, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+.modal-header {
+  padding: 24px;
+  border-bottom: 1px solid rgba(255, 214, 92, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.modal-icon {
+  font-size: 28px;
+}
+
+.modal-header h3 {
+  flex: 1;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.modal-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: #c0392b;
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.modal-desc {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+
+.input-field {
+  margin-bottom: 20px;
+}
+
+.input-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 48px 12px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 214, 92, 0.2);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+  border-color: #ffd65c;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.6;
+}
+
+.toggle-password:hover {
+  opacity: 1;
+}
+
+.password-strength {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.strength-bar {
+  width: 80px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.strength-bar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  transition: width 0.3s;
+}
+
+.strength-bar.weak::before {
+  width: 33%;
+  background: #e07070;
+}
+
+.strength-bar.medium::before {
+  width: 66%;
+  background: #ffd65c;
+}
+
+.strength-bar.strong::before {
+  width: 100%;
+  background: #2ecc71;
+}
+
+.strength-text {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.error-message {
+  font-size: 11px;
+  color: #e07070;
+  margin-top: 6px;
+}
+
+.alert {
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alert.success {
+  background: rgba(46, 204, 113, 0.1);
+  color: #2ecc71;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.alert.error {
+  background: rgba(192, 57, 43, 0.1);
+  color: #e07070;
+  border: 1px solid rgba(192, 57, 43, 0.3);
+}
+
+.modal-footer {
+  padding: 20px 24px 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.btn-cancel, .btn-save {
+  padding: 10px 24px;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid rgba(255, 214, 92, 0.3);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.btn-cancel:hover {
+  border-color: #ffd65c;
+  color: #ffd65c;
+}
+
+.btn-save {
+  background: linear-gradient(135deg, #ffd65c, #ffcc33);
+  border: none;
+  color: #1f3d2b;
+}
+
+.btn-save:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 214, 92, 0.3);
+}
+
+.btn-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   ANIMAÇÕES
+   ============================================ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   RESPONSIVIDADE MOBILE
+   ============================================ */
+@media (min-width: 768px) and (max-width: 991px) {
+  .sidebar-content {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .dashboard-content {
+    margin-top: 140px;
+  }
+}
+
 @media (max-width: 767px) {
+  .dashboard-header {
+    padding: 12px;
+  }
+
+  .sidebar-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .sidebar-top {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .sidebar-nav {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .btn-novo {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .sidebar-nav .nav-link {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .btn-redefinir {
+    width: 100%;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .sidebar-bottom {
+    width: 100%;
+  }
+
+  .btn-sair {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .dashboard-content {
+    margin-top: 220px;
+    padding: 16px 12px;
+  }
+
+  .post-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .post-thumb {
+    width: 100%;
+    height: 180px;
+  }
+
+  .post-info {
+    width: 100%;
+  }
+
+  .post-titulo {
+    font-size: 1rem;
+  }
+
+  .post-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .btn-ver, .btn-del {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+
   .quilombos-lista {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-content {
+    padding: 12px;
+    margin-top: 240px;
+  }
+
+  .post-row {
+    padding: 12px;
+  }
+
+  .post-thumb {
+    height: 150px;
+  }
+
+  .post-quilombo {
+    font-size: 0.7rem;
+  }
+
+  .post-titulo {
+    font-size: 0.95rem;
+  }
+
+  .btn-novo, .sidebar-nav .nav-link, .btn-sair, .btn-redefinir {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+
+  .modal-container {
+    width: 95%;
+    margin: 16px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .dashboard-content .container {
+    max-width: 1400px;
+  }
+
+  .post-row {
+    padding: 24px;
+  }
+
+  .post-thumb {
+    width: 120px;
+    height: 80px;
+  }
+
+  .post-titulo {
+    font-size: 1.2rem;
   }
 }

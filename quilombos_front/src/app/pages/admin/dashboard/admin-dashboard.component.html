@@ -4,31 +4,52 @@
     <div class="sidebar-content">
       <div class="sidebar-top">
         <h1 class="dash-title">Admin</h1>
-        <p class="dash-subtitle" *ngIf="abaAtiva === 'posts'">{{ totalPosts }} posts</p>
-        <p class="dash-subtitle" *ngIf="abaAtiva === 'quilombos'">{{ quilombos.length }} quilombos</p>
+        <p class="dash-subtitle" *ngIf="abaAtiva === 'posts'">
+          {{ totalPosts }} posts
+        </p>
+        <p class="dash-subtitle" *ngIf="abaAtiva === 'quilombos'">
+          {{ quilombos.length }} quilombos
+        </p>
       </div>
 
       <nav class="sidebar-nav">
-        <button 
-          (click)="setAba('posts')" 
-          class="nav-link-btn" 
-          [class.active]="abaAtiva === 'posts'">
+        <button
+          (click)="setAba('posts')"
+          class="nav-link-btn"
+          [class.active]="abaAtiva === 'posts'"
+        >
           📰 Gerenciar Posts
         </button>
 
-        <button 
-          (click)="setAba('quilombos')" 
-          class="nav-link-btn" 
-          [class.active]="abaAtiva === 'quilombos'">
+        <button
+          (click)="setAba('quilombos')"
+          class="nav-link-btn"
+          [class.active]="abaAtiva === 'quilombos'"
+        >
           🌳 Gerenciar Quilombos
         </button>
 
-        <hr class="nav-divider">
+        <hr class="nav-divider" />
 
-        <a routerLink="/admin/postagem/nova" class="btn-novo" *ngIf="abaAtiva === 'posts'">+ Nova Postagem</a>
-        <a routerLink="/admin/quilombo/novo" class="btn-novo" *ngIf="abaAtiva === 'quilombos'">+ Novo Quilombo</a>
+        <a
+          routerLink="/admin/postagem/nova"
+          class="btn-novo"
+          *ngIf="abaAtiva === 'posts'"
+          >+ Nova Postagem</a
+        >
+        <a
+          routerLink="/admin/quilombo/novo"
+          class="btn-novo"
+          *ngIf="abaAtiva === 'quilombos'"
+          >+ Novo Quilombo</a
+        >
 
         <a routerLink="/" class="nav-link"> Ver site </a>
+
+        <!-- Botão Redefinir Senha -->
+        <button class="btn-redefinir" (click)="openPasswordModal()">
+          🔐 Redefinir Senha
+        </button>
       </nav>
 
       <div class="sidebar-bottom">
@@ -63,45 +84,169 @@
           </div>
 
           <div class="post-actions">
-            <a [routerLink]="['/noticias', p.id]" class="btn-ver" target="_blank">Ver</a>
-            <button class="btn-del" (click)="deletarPostagem(p.id, p.titulo)">Excluir</button>
+            <a
+              [routerLink]="['/noticias', p.id]"
+              class="btn-ver"
+              target="_blank"
+              >Ver</a
+            >
+            <button class="btn-del" (click)="deletarPostagem(p.id, p.titulo)">
+              Excluir
+            </button>
           </div>
         </div>
 
         <div class="sem-posts" *ngIf="postagens.length === 0">
           <p>Nenhuma postagem ainda.</p>
-          <a routerLink="/admin/postagem/nova" class="btn-novo">Criar primeira postagem →</a>
+          <a routerLink="/admin/postagem/nova" class="btn-novo"
+            >Criar primeira postagem →</a
+          >
         </div>
       </div>
 
       <!-- LISTA DE QUILOMBOS -->
-      <div class="quilombos-lista" *ngIf="!carregando && abaAtiva === 'quilombos'">
+      <div
+        class="quilombos-lista"
+        *ngIf="!carregando && abaAtiva === 'quilombos'"
+      >
         <div class="quilombo-card" *ngFor="let q of quilombos">
           <div class="q-header">
             <div class="q-id">#{{ q.codigo }}</div>
             <h3 class="q-nome">{{ q.nome }}</h3>
           </div>
-          
+
           <div class="q-meta">
-            <span><strong>Região:</strong> {{ q.regiao || '---' }}</span>
-            <span><strong>Município:</strong> {{ q.municipio || '---' }}</span>
-            <span><strong>Ano:</strong> {{ q.ano || '---' }}</span>
-            <span><strong>Famílias:</strong> {{ q.familias || '---' }}</span>
+            <span><strong>Região:</strong> {{ q.regiao || "---" }}</span>
+            <span><strong>Município:</strong> {{ q.municipio || "---" }}</span>
+            <span><strong>Ano:</strong> {{ q.ano || "---" }}</span>
+            <span><strong>Famílias:</strong> {{ q.familias || "---" }}</span>
           </div>
 
           <p class="q-desc" *ngIf="q.descricao">{{ q.descricao }}</p>
 
           <div class="q-actions">
-            <a class="btn-edit" [routerLink]="['/admin/quilombo/editar', q.id]" title="Editar">Editar</a>
-            <button class="btn-del-outline" (click)="deletarQuilombo(q.id, q.nome)">Remover</button>
+            <a
+              class="btn-edit"
+              [routerLink]="['/admin/quilombo/editar', q.id]"
+              title="Editar"
+              >Editar</a
+            >
+            <button
+              class="btn-del-outline"
+              (click)="deletarQuilombo(q.id, q.nome)"
+            >
+              Remover
+            </button>
           </div>
         </div>
 
         <div class="sem-posts" *ngIf="quilombos.length === 0">
           <p>Nenhum quilombo cadastrado.</p>
-          <a routerLink="/admin/quilombo/novo" class="btn-novo">Cadastrar primeiro quilombo →</a>
+          <a routerLink="/admin/quilombo/novo" class="btn-novo"
+            >Cadastrar primeiro quilombo →</a
+          >
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE REDEFINIÇÃO DE SENHA -->
+<div
+  class="modal-overlay"
+  *ngIf="modalPasswordOpen"
+  (click)="closePasswordModal()"
+>
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-icon">🔐</div>
+      <h3>Redefinir senha</h3>
+      <button class="modal-close" (click)="closePasswordModal()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <p class="modal-desc">Altere sua senha de acesso ao painel</p>
+
+      <div class="input-field">
+        <label>Senha atual</label>
+        <div class="input-wrapper">
+          <input
+            [type]="showCurrentPassword ? 'text' : 'password'"
+            [(ngModel)]="senhaAtual"
+            placeholder="Digite sua senha atual"
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="toggleCurrentPassword()"
+          >
+            {{ showCurrentPassword ? "🙈" : "👁️" }}
+          </button>
+        </div>
+      </div>
+
+      <div class="input-field">
+        <label>Nova senha</label>
+        <div class="input-wrapper">
+          <input
+            [type]="showNewPassword ? 'text' : 'password'"
+            [(ngModel)]="novaSenha"
+            placeholder="Digite a nova senha"
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="toggleNewPassword()"
+          >
+            {{ showNewPassword ? "🙈" : "👁️" }}
+          </button>
+        </div>
+        <div class="password-strength" *ngIf="novaSenha">
+          <div class="strength-bar" [class]="passwordStrength"></div>
+          <span class="strength-text">{{ getPasswordStrengthText() }}</span>
+        </div>
+      </div>
+
+      <div class="input-field">
+        <label>Confirmar nova senha</label>
+        <div class="input-wrapper">
+          <input
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            [(ngModel)]="confirmarSenha"
+            placeholder="Confirme a nova senha"
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="toggleConfirmPassword()"
+          >
+            {{ showConfirmPassword ? "🙈" : "👁️" }}
+          </button>
+        </div>
+        <div class="error-message" *ngIf="senhaMismatch">
+          ⚠️ As senhas não coincidem
+        </div>
+      </div>
+
+      <div class="alert success" *ngIf="sucessoMensagem">
+        <span>✓</span> {{ sucessoMensagem }}
+      </div>
+      <div class="alert error" *ngIf="erroMensagem">
+        <span>⚠️</span> {{ erroMensagem }}
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="closePasswordModal()">
+        Cancelar
+      </button>
+      <button
+        class="btn-save"
+        (click)="alterarCredenciais()"
+        [disabled]="enviando"
+      >
+        {{ enviando ? "Salvando..." : "Salvar nova senha" }}
+      </button>
     </div>
   </div>
 </div>
