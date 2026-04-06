@@ -10,12 +10,13 @@ import Swal from 'sweetalert2';
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './admin-quilombo-form.component.html',
-  styleUrls: ['./admin-quilombo-form.component.scss']
+  styleUrls: ['./admin-quilombo-form.component.scss'],
 })
 export class AdminQuilomboFormComponent implements OnInit {
   isEdit = false;
+  imagePreview: string | null = null;
   id?: number;
-  
+
   quilombo: Partial<Quilombo> = {
     nome: '',
     regiao: '',
@@ -26,7 +27,7 @@ export class AdminQuilomboFormComponent implements OnInit {
     imagemUrl: '',
     historia: '',
     cultura: '',
-    territorio: ''
+    territorio: '',
   };
 
   salvando = false;
@@ -34,7 +35,7 @@ export class AdminQuilomboFormComponent implements OnInit {
   constructor(
     private quilomboService: QuilomboService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -48,11 +49,11 @@ export class AdminQuilomboFormComponent implements OnInit {
 
   carregar(id: number): void {
     this.quilomboService.getById(id).subscribe({
-      next: (q) => this.quilombo = { ...q },
+      next: (q) => (this.quilombo = { ...q }),
       error: () => {
         Swal.fire('Erro', 'Não foi possível carregar o quilombo.', 'error');
         this.router.navigate(['/admin/dashboard']);
-      }
+      },
     });
   }
 
@@ -63,9 +64,10 @@ export class AdminQuilomboFormComponent implements OnInit {
     }
 
     this.salvando = true;
-    const request = this.isEdit && this.id
-      ? this.quilomboService.update(this.id, this.quilombo)
-      : this.quilomboService.create(this.quilombo);
+    const request =
+      this.isEdit && this.id
+        ? this.quilomboService.update(this.id, this.quilombo)
+        : this.quilomboService.create(this.quilombo);
 
     request.subscribe({
       next: () => {
@@ -74,7 +76,7 @@ export class AdminQuilomboFormComponent implements OnInit {
           icon: 'success',
           title: `Quilombo ${this.isEdit ? 'atualizado' : 'criado'}!`,
           timer: 1500,
-          showConfirmButton: false
+          showConfirmButton: false,
         });
         this.router.navigate(['/admin/dashboard']);
       },
@@ -82,7 +84,26 @@ export class AdminQuilomboFormComponent implements OnInit {
         this.salvando = false;
         Swal.fire('Erro', 'Falha ao salvar informações do quilombo.', 'error');
         console.error(err);
-      }
+      },
     });
+  }
+
+  onImageSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result as string;
+        this.quilombo.imagemUrl = this.imagePreview;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  removeImage(event: Event): void {
+    event.stopPropagation();
+    this.imagePreview = null;
+    this.quilombo.imagemUrl = '';
   }
 }
