@@ -4,16 +4,31 @@ import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
+export interface AlterarCredenciaisDto {
+  senhaAtual: string;
+  novoUsuario: string;
+  novaSenha: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private tokenKey = 'quilombos_token';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {}
 
   login(usuario: string, senha: string): Observable<{ token: string }> {
     return this.http
-      .post<{ token: string }>(`${environment.apiUrl}/auth/login`, { usuario, senha })
-      .pipe(tap((res: { token: string }) => localStorage.setItem(this.tokenKey, res.token)));
+      .post<{
+        token: string;
+      }>(`${environment.apiUrl}/auth/login`, { usuario, senha })
+      .pipe(
+        tap((res: { token: string }) =>
+          localStorage.setItem(this.tokenKey, res.token),
+        ),
+      );
   }
 
   logout(): void {
@@ -34,5 +49,9 @@ export class AuthService {
     } catch {
       return false;
     }
+  }
+
+  alterarCredenciais(dto: AlterarCredenciaisDto): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/auth/credenciais`, dto);
   }
 }
